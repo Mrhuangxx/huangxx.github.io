@@ -1,0 +1,46 @@
+<!-- section: index  -->
+
+<div class="container">
+    <div class="separator"></div>
+    <div class="top_words">
+        <p> 欢迎来到 neutronest 的小站。这里记录了一些关于 程式语言应用 以及 机器学习等相关技术的文章(TECH BLOGS)。同时也包括一些生活，感想随笔 (ARTICLES)。如果你对深度学习，机器学习理论，函数式编程，形式语义等内容感兴趣，这里可能会有部分文章会对您有益（并没有 
+
+        </p>
+    </div>
+</div>
+
+<% page.posts.each(function(post){  %>
+    <div class="post-container">
+        <div class="post-content">
+            <div class="post-header">
+                <h2 class="title">
+                    <a href="<%- config.root %><%- post.path %>"><%- post.title %></a>
+                </h2>
+                <span>
+                    <%- partial('post/meta', {post: post}) %>
+                </span>
+                <p align="left">
+                    <% if (post.description){ %>
+                        <%- post.description %>
+                    <% } else { %>
+
+                        <%= post.content.replace(/<(?:.|\n)*?>/gm, '').substring(0, 400) %>
+
+                    <% } %>
+                </p>
+
+                <% if (theme.excerpt_link) { %>
+                    <div class="read-more">
+                        <a href="<%- config.root %><%- post.path %>" class="btn">— read more —</a>
+                    </div>
+                <% } %>
+            </div>
+        </div>
+    </div>
+    <div class="separator"></div>
+<% });  %>
+<div class="index-pagination" role="pagination">
+    <% if (page.prev) { %><a class="pull-left" href="<%- url_for(page.prev_link) %>">← Newer Posts</a><% } %>
+    <% if (page.next) { %><a class="pull-right" href="<%- url_for(page.next_link) %>">Older Posts →</a><% } %>
+</div>
+<!-- end of section: index -->
