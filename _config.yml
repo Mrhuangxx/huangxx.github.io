@@ -74,9 +74,11 @@ pagination_dir: page
 ## Themes: https://hexo.io/themes/
 theme: next
 
+
+
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
   type: git
-  repo: git@github.com:huang-xx.github.io.git
+  repo: https://github.com/huang-xx/huang-xx.github.io.git
   branch: master
