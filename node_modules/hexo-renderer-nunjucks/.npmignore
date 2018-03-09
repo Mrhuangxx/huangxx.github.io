@@ -1,0 +1,5 @@
+.git*
+typings
+index.ts
+tslint.json
+tsconfig.json

@@ -3,10 +3,10 @@
 ## Source: https://github.com/hexojs/hexo/
 
 # Site
-title: Hexo
+title: hyf
 subtitle:
 description:
-author: John Doe
+author: 
 language:
 timezone:
 
@@ -73,10 +73,34 @@ pagination_dir: page
 ## Plugins: https://hexo.io/plugins/
 ## Themes: https://hexo.io/themes/
 theme: landscape
+plugins:
+#  - hexo-generator-feed
+  - hexo-math
+
+#feed:
+#  type: atom
+#  path: atom.xml
+#  limit: 20
+#  hub:
+#  content:
+#  content_limit: 140
+#  content_limit_delim: ' '
+
+math:
+  engine: 'mathjax' # or 'katex'
+  mathjax:
+    src: custom_mathjax_source
+    config:
+       MathJax config
+  katex:
+    css: custom_css_source
+    js: custom_js_source # not used
+    config:
+       KaTeX config
 
 # Deployment
 ## Docs: https://hexo.io/docs/deployment.html
 deploy:
   type: git
-  repo: git@github.com:huang-xx/huang-xx.github.io.git 
+  repository: https://github.com/huang-xx/huang-xx.github.io.git 
   branch: master
