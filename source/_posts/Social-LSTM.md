@@ -5,7 +5,7 @@ date: 2018-03-10 19:43:02
 tags: paper
 ---
 # [Social LSTM:Human Trajectory Prediction in Crowded Space](http://cvgl.stanford.edu/papers/CVPR16_Social_LSTM.pdf)
-1. 论文发表在CVPR2016上(spotlight)。(已经引用121次)
+1. 论文发表在CVPR2016上(spotlight)(一作：Alexandre Alahi)。
 
 2. 论文的核心思想： 
 ![](/Social-LSTM/15203542098731.jpg)
@@ -21,6 +21,7 @@ tags: paper
 如上图所示，在每一个time-step，LSTM cell 从临近的LSTM cell接受   共享的隐含状态信息(pooled hidden-state information),得到一个三维的tensor(前两维为平面坐标，第三个维度是隐含状态)。
 1.  LSTM 的隐含状态  $h$$_{i}^t$捕获在时刻 t，第 i 个行人的隐含状态(latent representation)。
 2. 通过构建隐含状态张量("Social" hidden-state tensor) $H$$_{i}^t$与邻居共享行人隐含状态：
+
 > 给定隐含状态维度为$D$，邻居大小(即考虑范围)为$N_0$，对第 $i$ 个行人的轨迹构建一个 $N_0\times N_0 \times D$ 的tensor:
 ![](/Social-LSTM/15197416749439.jpg)
 上式中：
@@ -53,6 +54,7 @@ LSTM 的参数通过最小化负数对数似然损失学得($L^i$表示第 $i$ �
 通过对训练集中所有的轨迹最小化这个损失学得参数。(论文中关于实现细节讲的很少，但是这篇文章公开了code.)
 
 实验部分：选用的两个数据集分别是[ETH](http://www.vision.ee.ethz.ch/en/datasets/) 和 [UCY](https://graphics.cs.ucy.ac.cy/research/downloads/crowd-data), 使用三个不同的度量准则：
+
 > 1. 平均偏移错误(Average displacement error)。所有预测的坐标和真实的坐标之间的MSE。
 
 > 2. 最终偏移错误(Final displacement error)。模型预测的终点坐标和真实的终点坐标之间的差距。
