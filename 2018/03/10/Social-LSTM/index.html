@@ -77,13 +77,13 @@
 
 
 
-<meta name="description" content="Social LSTM:Human Trajectory Prediction in Crowded Space  论文发表在CVPR2016上(spotlight)。(已经引用121次) 论文的核心思想：  将行人的轨迹预测问题看作是序列生成问题，对每一个行人使用一个LSTM网络。并且对于空间上临近的行人，引入了一个“Social pooling”层。通过这个&amp;quot;Social pooli">
+<meta name="description" content="Social LSTM:Human Trajectory Prediction in Crowded Space  论文发表在CVPR2016上(spotlight)(一作：Alexandre Alahi)。 论文的核心思想：  将行人的轨迹预测问题看作是序列生成问题，对每一个行人使用一个LSTM网络。并且对于空间上临近的行人，引入了一个“Social pooling”层。通过这个&amp;quot;So">
 <meta name="keywords" content="paper">
 <meta property="og:type" content="article">
 <meta property="og:title" content="Social LSTM">
 <meta property="og:url" content="http://yoursite.com/2018/03/10/Social-LSTM/index.html">
 <meta property="og:site_name" content="hyf&#39;s blog">
-<meta property="og:description" content="Social LSTM:Human Trajectory Prediction in Crowded Space  论文发表在CVPR2016上(spotlight)。(已经引用121次) 论文的核心思想：  将行人的轨迹预测问题看作是序列生成问题，对每一个行人使用一个LSTM网络。并且对于空间上临近的行人，引入了一个“Social pooling”层。通过这个&amp;quot;Social pooli">
+<meta property="og:description" content="Social LSTM:Human Trajectory Prediction in Crowded Space  论文发表在CVPR2016上(spotlight)(一作：Alexandre Alahi)。 论文的核心思想：  将行人的轨迹预测问题看作是序列生成问题，对每一个行人使用一个LSTM网络。并且对于空间上临近的行人，引入了一个“Social pooling”层。通过这个&amp;quot;So">
 <meta property="og:locale" content="zh-Hans">
 <meta property="og:image" content="http://yoursite.com/2018/03/10/Social-LSTM/15203542098731.jpg">
 <meta property="og:image" content="http://yoursite.com/2018/03/10/Social-LSTM/15197217698948.jpg">
@@ -92,10 +92,10 @@
 <meta property="og:image" content="http://yoursite.com/2018/03/10/Social-LSTM/15197428867541.jpg">
 <meta property="og:image" content="http://yoursite.com/2018/03/10/Social-LSTM/15197479345650.jpg">
 <meta property="og:image" content="http://yoursite.com/2018/03/10/Social-LSTM/15197514964871.jpg">
-<meta property="og:updated_time" content="2018-03-10T12:25:37.155Z">
+<meta property="og:updated_time" content="2018-03-10T14:02:25.000Z">
 <meta name="twitter:card" content="summary">
 <meta name="twitter:title" content="Social LSTM">
-<meta name="twitter:description" content="Social LSTM:Human Trajectory Prediction in Crowded Space  论文发表在CVPR2016上(spotlight)。(已经引用121次) 论文的核心思想：  将行人的轨迹预测问题看作是序列生成问题，对每一个行人使用一个LSTM网络。并且对于空间上临近的行人，引入了一个“Social pooling”层。通过这个&amp;quot;Social pooli">
+<meta name="twitter:description" content="Social LSTM:Human Trajectory Prediction in Crowded Space  论文发表在CVPR2016上(spotlight)(一作：Alexandre Alahi)。 论文的核心思想：  将行人的轨迹预测问题看作是序列生成问题，对每一个行人使用一个LSTM网络。并且对于空间上临近的行人，引入了一个“Social pooling”层。通过这个&amp;quot;So">
 <meta name="twitter:image" content="http://yoursite.com/2018/03/10/Social-LSTM/15203542098731.jpg">
 
 
@@ -286,7 +286,7 @@
     <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/10/Social-LSTM/">
 
     <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
-      <meta itemprop="name" content="huangyf">
+      <meta itemprop="name" content="huangyingfan@outlook.com">
       <meta itemprop="description" content="">
       <meta itemprop="image" content="/images/avatar.gif">
     </span>
@@ -352,14 +352,17 @@
       
         <h1 id="social-lstmhuman-trajectory-prediction-in-crowded-space"><a href="http://cvgl.stanford.edu/papers/CVPR16_Social_LSTM.pdf" target="_blank" rel="noopener">Social LSTM:Human Trajectory Prediction in Crowded Space</a></h1>
 <ol style="list-style-type: decimal">
-<li><p>论文发表在CVPR2016上(spotlight)。(已经引用121次)</p></li>
+<li><p>论文发表在CVPR2016上(spotlight)(一作：Alexandre Alahi)。</p></li>
 <li><p>论文的核心思想： <img src="/2018/03/10/Social-LSTM/15203542098731.jpg"></p>
 将行人的轨迹预测问题看作是序列生成问题，对每一个行人使用一个LSTM网络。并且对于空间上临近的行人，引入了一个“Social pooling”层。通过这个&quot;Social pooling&quot;层，使得临近的行人能够共享他们的隐含状态 (这里的隐含状态指每个轨迹的LSTM中的隐含状态)。</li>
 <li>论文的创新点：完全的 data-driven 方式，没有人工提取的特征，没有设计的吸引力和排斥力(social force model)；同时考虑了相关的多个序列；建模了不同序列之间的相关性。</li>
 <li><p>论文的方法：</p>
 <p>问题规约： 对于时刻 <span class="math inline">\(t\)</span>，<span class="math inline">\(i^{th}\)</span> 的坐标为<span class="math inline">\((x_t^i ,y_t^i )\)</span>。已经知道了行人时刻 1 到时刻 <span class="math inline">\(T_{obs}\)</span>的坐标，希望知道<span class="math inline">\(T_{obs+1}\)</span> 到 <span class="math inline">\(T_{pred}\)</span> 的坐标。 <img src="/2018/03/10/Social-LSTM/15197217698948.jpg"></p></li>
 </ol>
-<p>如上图所示，在每一个time-step，LSTM cell 从临近的LSTM cell接受 共享的隐含状态信息(pooled hidden-state information),得到一个三维的tensor(前两维为平面坐标，第三个维度是隐含状态)。 1. LSTM 的隐含状态 <span class="math inline">\(h\)</span><span class="math inline">\(_{i}^t\)</span>捕获在时刻 t，第 i 个行人的隐含状态(latent representation)。 2. 通过构建隐含状态张量(&quot;Social&quot; hidden-state tensor) <span class="math inline">\(H\)</span><span class="math inline">\(_{i}^t\)</span>与邻居共享行人隐含状态： &gt; 给定隐含状态维度为<span class="math inline">\(D\)</span>，邻居大小(即考虑范围)为<span class="math inline">\(N_0\)</span>，对第 <span class="math inline">\(i\)</span> 个行人的轨迹构建一个 <span class="math inline">\(N_0\times N_0 \times D\)</span> 的tensor: <img src="/2018/03/10/Social-LSTM/15197416749439.jpg"> 上式中： * <span class="math inline">\(h\)</span><span class="math inline">\(_{t-1}^j\)</span> 是第 j 个行人在时刻 t-1 对应的LSTM 隐含状态。 * <span class="math inline">\(1_{mn}[x, y]\)</span>是指示函数，检查 <span class="math inline">\((x, y)\)</span>是否在<span class="math inline">\((m, n)\)</span>表示的方格内部。 * <span class="math inline">\(\mathscr{N}\)</span><span class="math inline">\(_i\)</span> 是第 <span class="math inline">\(i\)</span> 个行人的邻居集合。 如下图所示为黑色点代表的行人的Social-pooling <img src="/2018/03/10/Social-LSTM/15197406060633.jpg"> 上图中表示在某个特定的空间距离内(即上式中表示的N<sub>0</sub>)的存在三个邻居，分别用黄色、蓝色、橘色表示。 结合上图，可以理解方程(1)的含义： 首先，确定第 <span class="math inline">\(i\)</span> 个行人周围某个范围内的行人集合，然后以当前考虑行人为中心，确定各个邻居落在那个方格内，对于落在相同格子里的人，将其隐含状态相加。(上图中的示例 <span class="math inline">\(N_0\)</span>等于<span class="math inline">\(2\)</span>，而实验中实际<span class="math inline">\(N_0\)</span>取的是32),得到tensor.</p>
+<p>如上图所示，在每一个time-step，LSTM cell 从临近的LSTM cell接受 共享的隐含状态信息(pooled hidden-state information),得到一个三维的tensor(前两维为平面坐标，第三个维度是隐含状态)。 1. LSTM 的隐含状态 <span class="math inline">\(h\)</span><span class="math inline">\(_{i}^t\)</span>捕获在时刻 t，第 i 个行人的隐含状态(latent representation)。 2. 通过构建隐含状态张量(&quot;Social&quot; hidden-state tensor) <span class="math inline">\(H\)</span><span class="math inline">\(_{i}^t\)</span>与邻居共享行人隐含状态：</p>
+<blockquote>
+<p>给定隐含状态维度为<span class="math inline">\(D\)</span>，邻居大小(即考虑范围)为<span class="math inline">\(N_0\)</span>，对第 <span class="math inline">\(i\)</span> 个行人的轨迹构建一个 <span class="math inline">\(N_0\times N_0 \times D\)</span> 的tensor: <img src="/2018/03/10/Social-LSTM/15197416749439.jpg"> 上式中： * <span class="math inline">\(h\)</span><span class="math inline">\(_{t-1}^j\)</span> 是第 j 个行人在时刻 t-1 对应的LSTM 隐含状态。 * <span class="math inline">\(1_{mn}[x, y]\)</span>是指示函数，检查 <span class="math inline">\((x, y)\)</span>是否在<span class="math inline">\((m, n)\)</span>表示的方格内部。 * <span class="math inline">\(\mathscr{N}\)</span><span class="math inline">\(_i\)</span> 是第 <span class="math inline">\(i\)</span> 个行人的邻居集合。 如下图所示为黑色点代表的行人的Social-pooling <img src="/2018/03/10/Social-LSTM/15197406060633.jpg"> 上图中表示在某个特定的空间距离内(即上式中表示的N<sub>0</sub>)的存在三个邻居，分别用黄色、蓝色、橘色表示。 结合上图，可以理解方程(1)的含义： 首先，确定第 <span class="math inline">\(i\)</span> 个行人周围某个范围内的行人集合，然后以当前考虑行人为中心，确定各个邻居落在那个方格内，对于落在相同格子里的人，将其隐含状态相加。(上图中的示例 <span class="math inline">\(N_0\)</span>等于<span class="math inline">\(2\)</span>，而实验中实际<span class="math inline">\(N_0\)</span>取的是32),得到tensor.</p>
+</blockquote>
 <p>3.将张量<span class="math inline">\(H_t^i\)</span>映射(embed)到向量 <span class="math inline">\(a_t^i\)</span>, 将坐标映射到<span class="math inline">\(e_t^i\)</span> 。然后将这些向量连接起来，作为LSTM的输入。(这里需要注意的是在构建tensort时，当前考虑的行人的隐含状态是不包括在内的，此部分状态单独作为一部分输入到LSTM中，如图一所示) <img src="/2018/03/10/Social-LSTM/15197428867541.jpg"> 上式中<span class="math inline">\(\phi\)</span>为ReLU映射函数，<span class="math inline">\(W_e\)</span> 和 <span class="math inline">\(W_a\)</span> 为映射权重。</p>
 <p>位置估计： 使用 <span class="math inline">\(t\)</span> 时刻的隐含状态预测 <span class="math inline">\(t+1\)</span> 时刻位置坐标的分布(<span class="math inline">\(\hat{x}\)</span>, <span class="math inline">\(\hat{y}\)</span>)<span class="math inline">\(_{t+1}^i\)</span>。论文中使用的概率模型为二维高斯分布, (<span class="math inline">\(\hat{x}\)</span>, <span class="math inline">\(\hat{y}\)</span>)<span class="math inline">\(_{t}^i\)</span> ~ <span class="math inline">\(\mathscr{N}(\mu^i_t,\sigma^i_t,\rho^i_t)\)</span> 。其参数如下所示：</p>
 <blockquote>
@@ -376,7 +379,12 @@
 <span class="math display">\[[\mu_t^i,\sigma^i_t,\rho^i_t] = W_p \times h_i^{t-1} \]</span>
 </center>
 <p>LSTM 的参数通过最小化负数对数似然损失学得(<span class="math inline">\(L^i\)</span>表示第 <span class="math inline">\(i\)</span> 个人的轨迹): <img src="/2018/03/10/Social-LSTM/15197479345650.jpg"> （这里左边括号中应该还包括<span class="math inline">\(W_a\)</span>, 原文中应该是漏掉了） 通过对训练集中所有的轨迹最小化这个损失学得参数。(论文中关于实现细节讲的很少，但是这篇文章公开了code.)</p>
-<p>实验部分：选用的两个数据集分别是<a href="http://www.vision.ee.ethz.ch/en/datasets/" target="_blank" rel="noopener">ETH</a> 和 <a href="https://graphics.cs.ucy.ac.cy/research/downloads/crowd-data" target="_blank" rel="noopener">UCY</a>, 使用三个不同的度量准则： &gt; 1. 平均偏移错误(Average displacement error)。所有预测的坐标和真实的坐标之间的MSE。</p>
+<p>实验部分：选用的两个数据集分别是<a href="http://www.vision.ee.ethz.ch/en/datasets/" target="_blank" rel="noopener">ETH</a> 和 <a href="https://graphics.cs.ucy.ac.cy/research/downloads/crowd-data" target="_blank" rel="noopener">UCY</a>, 使用三个不同的度量准则：</p>
+<blockquote>
+<ol style="list-style-type: decimal">
+<li>平均偏移错误(Average displacement error)。所有预测的坐标和真实的坐标之间的MSE。</li>
+</ol>
+</blockquote>
 <blockquote>
 <ol start="2" style="list-style-type: decimal">
 <li>最终偏移错误(Final displacement error)。模型预测的终点坐标和真实的终点坐标之间的差距。</li>
@@ -421,6 +429,22 @@
       
 
       
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+              <a href="/2018/03/10/Pedestrian-Behavior-Understanding-and-Prediction-with-Deep-Neural-Networks/" rel="prev" title="Pedestrian Behavior Understanding and Prediction with Deep Neural Networks">
+                Pedestrian Behavior Understanding and Prediction with Deep Neural Networks <i class="fa fa-chevron-right"></i>
+              </a>
+            
+          </div>
+        </div>
+      
 
       
       
@@ -460,7 +484,7 @@
   <span class="with-love">
     <i class="fa fa-"></i>
   </span>
-  <span class="author" itemprop="copyrightHolder">huangyf</span>
+  <span class="author" itemprop="copyrightHolder">huangyingfan@outlook.com</span>
 
   
 </div>
