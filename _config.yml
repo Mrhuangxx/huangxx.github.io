@@ -5,7 +5,7 @@
 # Site
 title: hyf's blog
 subtitle:
-description:
+description: 
 author: huangyf
 language: zh-Hans
 timezone:
@@ -74,6 +74,11 @@ pagination_dir: page
 ## Themes: https://hexo.io/themes/
 theme: next
 
+search:
+  path: search.xml
+  field: post
+  format: html
+  limit: 10000
 
 
 # Deployment
