@@ -1,0 +1,994 @@
+<!DOCTYPE html>
+
+
+
+
+<html class="theme-next mist" lang="zh-Hans">
+<head>
+  <meta charset="UTF-8"/>
+<meta http-equiv="X-UA-Compatible" content="IE=edge" />
+<meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1"/>
+<meta name="theme-color" content="#222">
+
+
+
+
+
+
+
+
+
+<meta http-equiv="Cache-Control" content="no-transform" />
+<meta http-equiv="Cache-Control" content="no-siteapp" />
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+  <link href="/lib/fancybox/source/jquery.fancybox.css?v=2.1.5" rel="stylesheet" type="text/css" />
+
+
+
+
+
+
+
+<link href="/lib/font-awesome/css/font-awesome.min.css?v=4.6.2" rel="stylesheet" type="text/css" />
+
+<link href="/css/main.css?v=5.1.4" rel="stylesheet" type="text/css" />
+
+
+  <link rel="apple-touch-icon" sizes="180x180" href="/images/apple-touch-icon-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="32x32" href="/images/favicon-32x32-next.png?v=5.1.4">
+
+
+  <link rel="icon" type="image/png" sizes="16x16" href="/images/favicon-16x16-next.png?v=5.1.4">
+
+
+  <link rel="mask-icon" href="/images/logo.svg?v=5.1.4" color="#222">
+
+
+
+
+
+  <meta name="keywords" content="paper," />
+
+
+
+
+
+
+
+
+
+
+<meta name="description" content="Understanding Pedestrian Behaviors from Stationary Crowd Groups  论文发表在CVPR2015上(一作:Shuai Yi)。 论文的主要工作是：建立了一个行人运动(pedestrian behavior)的模型，其中，对静态人群是分析是关键部分。模型可以用来预测行人的轨迹；预测行人运动的终点；以及对人群中行人的运动行为分析。 论文的">
+<meta name="keywords" content="paper">
+<meta property="og:type" content="article">
+<meta property="og:title" content="Understanding Pedestrian Behaviors(CVPR2015)">
+<meta property="og:url" content="http://yoursite.com/2018/03/10/Understanding-Pedestrian-Behaviors-CVPR2015/index.html">
+<meta property="og:site_name" content="hyf&#39;s blog">
+<meta property="og:description" content="Understanding Pedestrian Behaviors from Stationary Crowd Groups  论文发表在CVPR2015上(一作:Shuai Yi)。 论文的主要工作是：建立了一个行人运动(pedestrian behavior)的模型，其中，对静态人群是分析是关键部分。模型可以用来预测行人的轨迹；预测行人运动的终点；以及对人群中行人的运动行为分析。 论文的">
+<meta property="og:locale" content="zh-Hans">
+<meta property="og:image" content="http://yoursite.com/2018/03/10/Understanding-Pedestrian-Behaviors-CVPR2015/15198897069641.jpg">
+<meta property="og:image" content="http://yoursite.com/2018/03/10/Understanding-Pedestrian-Behaviors-CVPR2015/15198918330798.jpg">
+<meta property="og:image" content="http://yoursite.com/2018/03/10/Understanding-Pedestrian-Behaviors-CVPR2015/15198919545235.jpg">
+<meta property="og:image" content="http://yoursite.com/2018/03/10/Understanding-Pedestrian-Behaviors-CVPR2015/15198927017157.jpg">
+<meta property="og:image" content="http://yoursite.com/2018/03/10/Understanding-Pedestrian-Behaviors-CVPR2015/15199214092427.jpg">
+<meta property="og:image" content="http://yoursite.com/2018/03/10/Understanding-Pedestrian-Behaviors-CVPR2015/15199222658062.jpg">
+<meta property="og:image" content="http://yoursite.com/2018/03/10/Understanding-Pedestrian-Behaviors-CVPR2015/15201623680549.jpg">
+<meta property="og:image" content="http://yoursite.com/2018/03/10/Understanding-Pedestrian-Behaviors-CVPR2015/15201632366350.jpg">
+<meta property="og:image" content="http://yoursite.com/2018/03/10/Understanding-Pedestrian-Behaviors-CVPR2015/15201639578418.jpg">
+<meta property="og:image" content="http://yoursite.com/2018/03/10/Understanding-Pedestrian-Behaviors-CVPR2015/15201640415371.jpg">
+<meta property="og:image" content="http://yoursite.com/2018/03/10/Understanding-Pedestrian-Behaviors-CVPR2015/15201640785872.jpg">
+<meta property="og:image" content="http://yoursite.com/2018/03/10/Understanding-Pedestrian-Behaviors-CVPR2015/15201654272269.jpg">
+<meta property="og:image" content="http://yoursite.com/2018/03/10/Understanding-Pedestrian-Behaviors-CVPR2015/15201658922276.jpg">
+<meta property="og:image" content="http://yoursite.com/2018/03/10/Understanding-Pedestrian-Behaviors-CVPR2015/15201660409081.jpg">
+<meta property="og:image" content="http://yoursite.com/2018/03/10/Understanding-Pedestrian-Behaviors-CVPR2015/15201663728707.jpg">
+<meta property="og:image" content="http://yoursite.com/2018/03/10/Understanding-Pedestrian-Behaviors-CVPR2015/15201667242091.jpg">
+<meta property="og:updated_time" content="2018-03-10T13:28:36.426Z">
+<meta name="twitter:card" content="summary">
+<meta name="twitter:title" content="Understanding Pedestrian Behaviors(CVPR2015)">
+<meta name="twitter:description" content="Understanding Pedestrian Behaviors from Stationary Crowd Groups  论文发表在CVPR2015上(一作:Shuai Yi)。 论文的主要工作是：建立了一个行人运动(pedestrian behavior)的模型，其中，对静态人群是分析是关键部分。模型可以用来预测行人的轨迹；预测行人运动的终点；以及对人群中行人的运动行为分析。 论文的">
+<meta name="twitter:image" content="http://yoursite.com/2018/03/10/Understanding-Pedestrian-Behaviors-CVPR2015/15198897069641.jpg">
+
+
+
+<script type="text/javascript" id="hexo.configurations">
+  var NexT = window.NexT || {};
+  var CONFIG = {
+    root: '/',
+    scheme: 'Mist',
+    version: '5.1.4',
+    sidebar: {"position":"right","display":"remove"},
+    fancybox: true,
+    tabs: true,
+    motion: {"enable":false,"async":false,"transition":{"post_block":"fadeIn","post_header":"slideDownIn","post_body":"slideDownIn","coll_header":"slideLeftIn","sidebar":"slideUpIn"}},
+    duoshuo: {
+      userId: '0',
+      author: '博主'
+    },
+    algolia: {
+      applicationID: '',
+      apiKey: '',
+      indexName: '',
+      hits: {"per_page":10},
+      labels: {"input_placeholder":"Search for Posts","hits_empty":"We didn't find any results for the search: ${query}","hits_stats":"${hits} results found in ${time} ms"}
+    }
+  };
+</script>
+
+
+
+  <link rel="canonical" href="http://yoursite.com/2018/03/10/Understanding-Pedestrian-Behaviors-CVPR2015/"/>
+
+
+
+
+
+  <title>Understanding Pedestrian Behaviors(CVPR2015) | hyf's blog</title>
+  
+
+
+
+
+
+
+
+
+</head>
+
+<body itemscope itemtype="http://schema.org/WebPage" lang="zh-Hans">
+
+  
+  
+    
+  
+
+  <div class="container sidebar-position-right page-post-detail">
+    <div class="headband"></div>
+
+    <header id="header" class="header" itemscope itemtype="http://schema.org/WPHeader">
+      <div class="header-inner"><div class="site-brand-wrapper">
+  <div class="site-meta ">
+    
+
+    <div class="custom-logo-site-title">
+      <a href="/"  class="brand" rel="start">
+        <span class="logo-line-before"><i></i></span>
+        <span class="site-title">hyf's blog</span>
+        <span class="logo-line-after"><i></i></span>
+      </a>
+    </div>
+      
+        <p class="site-subtitle"></p>
+      
+  </div>
+
+  <div class="site-nav-toggle">
+    <button>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+      <span class="btn-bar"></span>
+    </button>
+  </div>
+</div>
+
+<nav class="site-nav">
+  
+
+  
+    <ul id="menu" class="menu">
+      
+        
+        <li class="menu-item menu-item-home">
+          <a href="/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-home"></i> <br />
+            
+            首页
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-tags">
+          <a href="/tags/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-tags"></i> <br />
+            
+            标签
+          </a>
+        </li>
+      
+        
+        <li class="menu-item menu-item-archives">
+          <a href="/archives/" rel="section">
+            
+              <i class="menu-item-icon fa fa-fw fa-archive"></i> <br />
+            
+            归档
+          </a>
+        </li>
+      
+
+      
+        <li class="menu-item menu-item-search">
+          
+            <a href="javascript:;" class="popup-trigger">
+          
+            
+              <i class="menu-item-icon fa fa-search fa-fw"></i> <br />
+            
+            搜索
+          </a>
+        </li>
+      
+    </ul>
+  
+
+  
+    <div class="site-search">
+      
+  <div class="popup search-popup local-search-popup">
+  <div class="local-search-header clearfix">
+    <span class="search-icon">
+      <i class="fa fa-search"></i>
+    </span>
+    <span class="popup-btn-close">
+      <i class="fa fa-times-circle"></i>
+    </span>
+    <div class="local-search-input-wrapper">
+      <input autocomplete="off"
+             placeholder="搜索..." spellcheck="false"
+             type="text" id="local-search-input">
+    </div>
+  </div>
+  <div id="local-search-result"></div>
+</div>
+
+
+
+    </div>
+  
+</nav>
+
+
+
+ </div>
+    </header>
+
+    <main id="main" class="main">
+      <div class="main-inner">
+        <div class="content-wrap">
+          <div id="content" class="content">
+            
+
+  <div id="posts" class="posts-expand">
+    
+
+  
+
+  
+  
+  
+
+  <article class="post post-type-normal" itemscope itemtype="http://schema.org/Article">
+  
+  
+  
+  <div class="post-block">
+    <link itemprop="mainEntityOfPage" href="http://yoursite.com/2018/03/10/Understanding-Pedestrian-Behaviors-CVPR2015/">
+
+    <span hidden itemprop="author" itemscope itemtype="http://schema.org/Person">
+      <meta itemprop="name" content="huangyingfan@outlook.com">
+      <meta itemprop="description" content="">
+      <meta itemprop="image" content="/images/avatar.gif">
+    </span>
+
+    <span hidden itemprop="publisher" itemscope itemtype="http://schema.org/Organization">
+      <meta itemprop="name" content="hyf's blog">
+    </span>
+
+    
+      <header class="post-header">
+
+        
+        
+          <h1 class="post-title" itemprop="name headline">Understanding Pedestrian Behaviors(CVPR2015)</h1>
+        
+
+        <div class="post-meta">
+          <span class="post-time">
+            
+              <span class="post-meta-item-icon">
+                <i class="fa fa-calendar-o"></i>
+              </span>
+              
+                <span class="post-meta-item-text">发表于</span>
+              
+              <time title="创建于" itemprop="dateCreated datePublished" datetime="2018-03-10T21:16:23+08:00">
+                2018-03-10
+              </time>
+            
+
+            
+
+            
+          </span>
+
+          
+
+          
+            
+          
+
+          
+          
+
+          
+
+          
+
+          
+
+        </div>
+      </header>
+    
+
+    
+    
+    
+    <div class="post-body" itemprop="articleBody">
+
+      
+      
+
+      
+        <h1 id="understanding-pedestrian-behaviors-from-stationary-crowd-groups"><a href="https://www.cv-foundation.org/openaccess/content_cvpr_2015/papers/Yi_Understanding_Pedestrian_Behaviors_2015_CVPR_paper.pdf" target="_blank" rel="noopener">Understanding Pedestrian Behaviors from Stationary Crowd Groups</a></h1>
+<ol style="list-style-type: decimal">
+<li><p>论文发表在CVPR2015上(一作:Shuai Yi)。</p></li>
+<li>论文的主要工作是：建立了一个行人运动(pedestrian behavior)的模型，其中，对静态人群是分析是关键部分。模型可以用来预测行人的轨迹；预测行人运动的终点；以及对人群中行人的运动行为分析。</li>
+<li><p>论文的方法：</p>
+<blockquote>
+<p>相关研究发现：静止的人群(stationary crowd groups)对行人运动的影响大于运动的人群(moving crowds)。(当运动的行人遇到运动的人群时, 行人一般只会减速，而当遇到静止的人群时，通常会改变方向)。 <img src="/2018/03/10/Understanding-Pedestrian-Behaviors-CVPR2015/15198897069641.jpg"> 如上图所示：场景中的静止人群既可以作为（单个人）运动的终点和起点，也可以作为障碍物或者通道。 由于静止人群的位置分布(spatial distribution)可能随时间变化，因而引入了动态特征(dynamic variations of trafﬁc patterns)。而且当行人遇到静止人群时，即可能绕开人群，也可能穿过人群。论文建模了这些情况。</p>
+</blockquote></li>
+</ol>
+<ul>
+<li><p>Pedestrian Behavior Modeling</p>
+<blockquote>
+<p>行人通常会选择最方便、最有效的路径到达目的地。文章提出了一个“通用场景能量图”(general scene energy map), 来表示场景中不同位置的travel difficulty。能量越高的地方表示行人越愿意经过这些地方，因而，在能量高的地方观测到行人的概率也越大。</p>
+</blockquote></li>
+<li><p>通用能量图建模(General energy map modeling)</p>
+<blockquote>
+<p>通用能量图从三个方面来建模：1. 场景布局 <span class="math inline">\(f_{SL}\)</span>；2.移动的行人<span class="math inline">\(f_{MP}\)</span>; 3. 静止的人群 <span class="math inline">\(f_{SG}\)</span>。 <img src="/2018/03/10/Understanding-Pedestrian-Behaviors-CVPR2015/15198918330798.jpg"> 其中，<span class="math inline">\(\theta_1,\theta_2,\theta_3,\theta_4\)</span>不同项的权值向量。各项的表达式如下所示：</p>
+</blockquote>
+<h5 id="场景因素">1.场景因素：</h5>
+<blockquote>
+<p><img src="/2018/03/10/Understanding-Pedestrian-Behaviors-CVPR2015/15198919545235.jpg"> 一般情况下，越是离障碍物近的地方，行人越不可能去。 上式中，<span class="math inline">\(SL\)</span>代表障碍物占据的位置，<span class="math inline">\(d_1(x,SL)=min_{y\in{SL}}\parallel x-y \parallel_2^2\)</span> 衡量当前位置<span class="math inline">\(x\)</span>与最近的障碍物距离。<span class="math inline">\(x\)</span> 越靠近障碍物，<span class="math inline">\(f_{SL}\)</span>的值越小。</p>
+</blockquote>
+<h5 id="移动行人的影响">2.移动行人的影响：</h5>
+<blockquote>
+<p><img src="/2018/03/10/Understanding-Pedestrian-Behaviors-CVPR2015/15198927017157.jpg"> 行人总是与其他行人保持一定的距离，因此，行人周围地点的能量值较低。 上式中，<span class="math inline">\(MP_i\)</span> 代表第<span class="math inline">\(i\)</span>个移动的行人，<span class="math inline">\(x_t^{MP_i}\)</span>是<span class="math inline">\(MP_i\)</span>在当前时刻<span class="math inline">\(t\)</span>的位置，<span class="math inline">\(x_{t+1}^{MP_i}\)</span>是估计出来<span class="math inline">\(t+1\)</span>时刻的位置。<span class="math inline">\(d_2(x,MP_i)=(\parallel x-x^{MP_i}_t\parallel +\parallel x-x^{MP_i}_{t+1} \parallel )^2 - (\parallel x_t^{MP_i} - x_{t+1}^{MP_i}\parallel)^2\)</span>,衡量当前位置<span class="math inline">\(x\)</span>到移动的行人<span class="math inline">\(MP_i\)</span>的距离。(这个距离度量来自social-force model)。</p>
+</blockquote>
+<h5 id="静止人群的影响">3.静止人群的影响：</h5>
+<p>对于绕过人群的行人来说，静止的人群可以视为障碍物(等同于场景因素)；对于穿过人群的行人，需要根据人群的密度不同，设置不同的罚项。 <img src="/2018/03/10/Understanding-Pedestrian-Behaviors-CVPR2015/15199214092427.jpg"> 其中，<span class="math inline">\(SG_i\)</span>是第<span class="math inline">\(i\)</span>个静止的人群区域。<span class="math inline">\(d_3(x,SG_i)=min_{y\in{SG_i}}\parallel x-y \parallel^2_2\)</span>衡量<span class="math inline">\(x\)</span>到<span class="math inline">\(SG_i\)</span>区域的距离。<span class="math inline">\(d_4(SG_i)\)</span>衡量人群 <span class="math inline">\(SG_i\)</span> 的稀疏性(<span class="math inline">\(d_4\)</span>计算人群中行人之间的平均距离)。当<span class="math inline">\(x\in SG_i\)</span>时，<span class="math inline">\(d_3(x,SG_i)=0\)</span>.</p></li>
+<li><p>个性化能量图(Personalized energy map modeling) 在相同的环境下，不同的行人也可能有不同的走法，通过设置一个个性化因子<span class="math inline">\(P\)</span>来建模. <img src="/2018/03/10/Understanding-Pedestrian-Behaviors-CVPR2015/15199222658062.jpg"> 若<span class="math inline">\(P\)</span>值较大，则对于这个人来说，通用能量图中的所有因子<span class="math inline">\(\theta_1,\theta_2,\theta_3\)</span>将同比例增大，此时，障碍物、行人、静止的人群周围的能量值都将下降，因而，此行人将走更远的路，来避免接触到这些障碍物。而当<span class="math inline">\(P\)</span>值较小时，此人较少关注这些障碍物(walking aggressively and cares less about obstacles.)</p></li>
+<li>路径生成的过程 给定起始点<span class="math inline">\(x_s\)</span>和终点<span class="math inline">\(s_d\)</span>，可以基于能量图M(或者个性化能量图<span class="math inline">\(M_P\)</span>)，通过Fast Marching算法得到最优路径。 <img src="/2018/03/10/Understanding-Pedestrian-Behaviors-CVPR2015/15201623680549.jpg"> 此时得到的<span class="math inline">\(\hat{T}\)</span>是当前能量图下最可能、最有效的路线。</li>
+<li>模型的学习 能量图中某一点的能量表示了在这点观察到行人的概率。因此，模型的参数可以通过最大化似然函数得到。通过一个归一化项<span class="math inline">\(Z(\theta)\)</span>，得到： <img src="/2018/03/10/Understanding-Pedestrian-Behaviors-CVPR2015/15201632366350.jpg"> 其中，<span class="math inline">\(Z(\theta)= \int M(x;\theta)dx\)</span>。 对于给定的K个观测点<span class="math inline">\(x_1,x_2,...,x_k\)</span>，观测到序列<span class="math inline">\(X=\{x_1,x_2,...,x_k\}\)</span> 的似然函数为： <img src="/2018/03/10/Understanding-Pedestrian-Behaviors-CVPR2015/15201639578418.jpg"> 因而参数<span class="math inline">\(\theta\)</span>可以通过下式得到： <img src="/2018/03/10/Understanding-Pedestrian-Behaviors-CVPR2015/15201640415371.jpg"> 通过梯度下降法迭代更新参数： <img src="/2018/03/10/Understanding-Pedestrian-Behaviors-CVPR2015/15201640785872.jpg"></li>
+<li>行人的路线预测： 定义一个over-cost值 <span class="math inline">\(\eta\)</span> 来衡量预测结果和ground-truth的匹配程度。 <img src="/2018/03/10/Understanding-Pedestrian-Behaviors-CVPR2015/15201654272269.jpg"> 上式中<span class="math inline">\(C(T_O,M)\)</span>是基于当前能量图,由实际观测到的路线产生的cost。而<span class="math inline">\(C(\hat{T},M)\)</span>是基于最优路线<span class="math inline">\(\hat{T}\)</span>产生的花费。由于<span class="math inline">\(C(T_O,M) &gt; C(\hat{T},M)\)</span>。因而<span class="math inline">\(\eta\)</span>越小，表示匹配的越好。 结果： <img src="/2018/03/10/Understanding-Pedestrian-Behaviors-CVPR2015/15201658922276.jpg"></li>
+<li><p>行人运动终点预测： 给定起点<span class="math inline">\(x_s\)</span>和部分轨迹<span class="math inline">\(T\)</span>，可以预测终点位置： <img src="/2018/03/10/Understanding-Pedestrian-Behaviors-CVPR2015/15201660409081.jpg"> 方法是：输入起点和前半部分轨迹，对于10个终点位置<span class="math inline">\(S_i\)</span>，计算 <img src="/2018/03/10/Understanding-Pedestrian-Behaviors-CVPR2015/15201663728707.jpg"> 其中，<span class="math inline">\(\hat{T_{0.5}}(x_d&#39;)\)</span>是<span class="math inline">\(\hat{T}(x_d&#39;)\)</span>的前半部分，而<span class="math inline">\(\hat{T}(x_d&#39;)=f_{FM}(M, x_s, x_d&#39;)\)</span>表示从<span class="math inline">\(x_s\)</span>出发到<span class="math inline">\(x_d&#39;\)</span>的最优路线，<span class="math inline">\(D(·,·)\)</span>表示两条轨迹之间的距离， top_n 的预测结果如下： <img src="/2018/03/10/Understanding-Pedestrian-Behaviors-CVPR2015/15201667242091.jpg"></p></li>
+</ul>
+<p>原文中还包括对<span class="math inline">\(P\)</span>值的探讨，以及通过<span class="math inline">\(P\)</span>值将人群分类(方法还是通过最小化预测轨迹和观测轨迹的差距)。这里不再介绍。</p>
+
+      
+    </div>
+    
+    
+    
+
+    
+
+    
+
+    
+
+    <footer class="post-footer">
+      
+        <div class="post-tags">
+          
+            <a href="/tags/paper/" rel="tag"># paper</a>
+          
+        </div>
+      
+
+      
+      
+      
+
+      
+        <div class="post-nav">
+          <div class="post-nav-next post-nav-item">
+            
+              <a href="/2018/03/10/Pedestrian-Behavior-Understanding-and-Prediction-with-Deep-Neural-Networks/" rel="next" title="Pedestrian Behavior Understanding and Prediction with Deep Neural Networks">
+                <i class="fa fa-chevron-left"></i> Pedestrian Behavior Understanding and Prediction with Deep Neural Networks
+              </a>
+            
+          </div>
+
+          <span class="post-nav-divider"></span>
+
+          <div class="post-nav-prev post-nav-item">
+            
+          </div>
+        </div>
+      
+
+      
+      
+    </footer>
+  </div>
+  
+  
+  
+  </article>
+
+
+
+    <div class="post-spread">
+      
+    </div>
+  </div>
+
+
+          </div>
+          
+
+
+          
+
+  
+
+
+
+        </div>
+        
+      </div>
+    </main>
+
+    <footer id="footer" class="footer">
+      <div class="footer-inner">
+        <div class="copyright">&copy; <span itemprop="copyrightYear">2018</span>
+  <span class="with-love">
+    <i class="fa fa-"></i>
+  </span>
+  <span class="author" itemprop="copyrightHolder">huangyingfan@outlook.com</span>
+
+  
+</div>
+
+
+
+
+
+
+
+
+
+        
+
+
+
+
+
+
+
+        
+      </div>
+    </footer>
+
+    
+      <div class="back-to-top">
+        <i class="fa fa-arrow-up"></i>
+        
+      </div>
+    
+
+    
+
+  </div>
+
+  
+
+<script type="text/javascript">
+  if (Object.prototype.toString.call(window.Promise) !== '[object Function]') {
+    window.Promise = null;
+  }
+</script>
+
+
+
+
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery/index.js?v=2.1.3"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fastclick/lib/fastclick.min.js?v=1.0.6"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/jquery_lazyload/jquery.lazyload.js?v=1.9.7"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/velocity/velocity.ui.min.js?v=1.2.1"></script>
+  
+
+  
+  
+    <script type="text/javascript" src="/lib/fancybox/source/jquery.fancybox.pack.js?v=2.1.5"></script>
+  
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/utils.js?v=5.1.4"></script>
+
+  <script type="text/javascript" src="/js/src/motion.js?v=5.1.4"></script>
+
+
+
+  
+  
+
+  
+  <script type="text/javascript" src="/js/src/scrollspy.js?v=5.1.4"></script>
+<script type="text/javascript" src="/js/src/post-details.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  <script type="text/javascript" src="/js/src/bootstrap.js?v=5.1.4"></script>
+
+
+
+  
+
+
+  
+
+
+
+
+	
+
+
+
+
+
+  
+
+
+
+
+
+  
+
+
+
+
+
+
+
+
+
+
+
+
+  
+
+  <script type="text/javascript">
+    // Popup Window;
+    var isfetched = false;
+    var isXml = true;
+    // Search DB path;
+    var search_path = "search.xml";
+    if (search_path.length === 0) {
+      search_path = "search.xml";
+    } else if (/json$/i.test(search_path)) {
+      isXml = false;
+    }
+    var path = "/" + search_path;
+    // monitor main search box;
+
+    var onPopupClose = function (e) {
+      $('.popup').hide();
+      $('#local-search-input').val('');
+      $('.search-result-list').remove();
+      $('#no-result').remove();
+      $(".local-search-pop-overlay").remove();
+      $('body').css('overflow', '');
+    }
+
+    function proceedsearch() {
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay"></div>')
+        .css('overflow', 'hidden');
+      $('.search-popup-overlay').click(onPopupClose);
+      $('.popup').toggle();
+      var $localSearchInput = $('#local-search-input');
+      $localSearchInput.attr("autocapitalize", "none");
+      $localSearchInput.attr("autocorrect", "off");
+      $localSearchInput.focus();
+    }
+
+    // search function;
+    var searchFunc = function(path, search_id, content_id) {
+      'use strict';
+
+      // start loading animation
+      $("body")
+        .append('<div class="search-popup-overlay local-search-pop-overlay">' +
+          '<div id="search-loading-icon">' +
+          '<i class="fa fa-spinner fa-pulse fa-5x fa-fw"></i>' +
+          '</div>' +
+          '</div>')
+        .css('overflow', 'hidden');
+      $("#search-loading-icon").css('margin', '20% auto 0 auto').css('text-align', 'center');
+
+      $.ajax({
+        url: path,
+        dataType: isXml ? "xml" : "json",
+        async: true,
+        success: function(res) {
+          // get the contents from search data
+          isfetched = true;
+          $('.popup').detach().appendTo('.header-inner');
+          var datas = isXml ? $("entry", res).map(function() {
+            return {
+              title: $("title", this).text(),
+              content: $("content",this).text(),
+              url: $("url" , this).text()
+            };
+          }).get() : res;
+          var input = document.getElementById(search_id);
+          var resultContent = document.getElementById(content_id);
+          var inputEventFunction = function() {
+            var searchText = input.value.trim().toLowerCase();
+            var keywords = searchText.split(/[\s\-]+/);
+            if (keywords.length > 1) {
+              keywords.push(searchText);
+            }
+            var resultItems = [];
+            if (searchText.length > 0) {
+              // perform local searching
+              datas.forEach(function(data) {
+                var isMatch = false;
+                var hitCount = 0;
+                var searchTextCount = 0;
+                var title = data.title.trim();
+                var titleInLowerCase = title.toLowerCase();
+                var content = data.content.trim().replace(/<[^>]+>/g,"");
+                var contentInLowerCase = content.toLowerCase();
+                var articleUrl = decodeURIComponent(data.url);
+                var indexOfTitle = [];
+                var indexOfContent = [];
+                // only match articles with not empty titles
+                if(title != '') {
+                  keywords.forEach(function(keyword) {
+                    function getIndexByWord(word, text, caseSensitive) {
+                      var wordLen = word.length;
+                      if (wordLen === 0) {
+                        return [];
+                      }
+                      var startPosition = 0, position = [], index = [];
+                      if (!caseSensitive) {
+                        text = text.toLowerCase();
+                        word = word.toLowerCase();
+                      }
+                      while ((position = text.indexOf(word, startPosition)) > -1) {
+                        index.push({position: position, word: word});
+                        startPosition = position + wordLen;
+                      }
+                      return index;
+                    }
+
+                    indexOfTitle = indexOfTitle.concat(getIndexByWord(keyword, titleInLowerCase, false));
+                    indexOfContent = indexOfContent.concat(getIndexByWord(keyword, contentInLowerCase, false));
+                  });
+                  if (indexOfTitle.length > 0 || indexOfContent.length > 0) {
+                    isMatch = true;
+                    hitCount = indexOfTitle.length + indexOfContent.length;
+                  }
+                }
+
+                // show search results
+
+                if (isMatch) {
+                  // sort index by position of keyword
+
+                  [indexOfTitle, indexOfContent].forEach(function (index) {
+                    index.sort(function (itemLeft, itemRight) {
+                      if (itemRight.position !== itemLeft.position) {
+                        return itemRight.position - itemLeft.position;
+                      } else {
+                        return itemLeft.word.length - itemRight.word.length;
+                      }
+                    });
+                  });
+
+                  // merge hits into slices
+
+                  function mergeIntoSlice(text, start, end, index) {
+                    var item = index[index.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    var hits = [];
+                    var searchTextCountInSlice = 0;
+                    while (position + word.length <= end && index.length != 0) {
+                      if (word === searchText) {
+                        searchTextCountInSlice++;
+                      }
+                      hits.push({position: position, length: word.length});
+                      var wordEnd = position + word.length;
+
+                      // move to next position of hit
+
+                      index.pop();
+                      while (index.length != 0) {
+                        item = index[index.length - 1];
+                        position = item.position;
+                        word = item.word;
+                        if (wordEnd > position) {
+                          index.pop();
+                        } else {
+                          break;
+                        }
+                      }
+                    }
+                    searchTextCount += searchTextCountInSlice;
+                    return {
+                      hits: hits,
+                      start: start,
+                      end: end,
+                      searchTextCount: searchTextCountInSlice
+                    };
+                  }
+
+                  var slicesOfTitle = [];
+                  if (indexOfTitle.length != 0) {
+                    slicesOfTitle.push(mergeIntoSlice(title, 0, title.length, indexOfTitle));
+                  }
+
+                  var slicesOfContent = [];
+                  while (indexOfContent.length != 0) {
+                    var item = indexOfContent[indexOfContent.length - 1];
+                    var position = item.position;
+                    var word = item.word;
+                    // cut out 100 characters
+                    var start = position - 20;
+                    var end = position + 80;
+                    if(start < 0){
+                      start = 0;
+                    }
+                    if (end < position + word.length) {
+                      end = position + word.length;
+                    }
+                    if(end > content.length){
+                      end = content.length;
+                    }
+                    slicesOfContent.push(mergeIntoSlice(content, start, end, indexOfContent));
+                  }
+
+                  // sort slices in content by search text's count and hits' count
+
+                  slicesOfContent.sort(function (sliceLeft, sliceRight) {
+                    if (sliceLeft.searchTextCount !== sliceRight.searchTextCount) {
+                      return sliceRight.searchTextCount - sliceLeft.searchTextCount;
+                    } else if (sliceLeft.hits.length !== sliceRight.hits.length) {
+                      return sliceRight.hits.length - sliceLeft.hits.length;
+                    } else {
+                      return sliceLeft.start - sliceRight.start;
+                    }
+                  });
+
+                  // select top N slices in content
+
+                  var upperBound = parseInt('1');
+                  if (upperBound >= 0) {
+                    slicesOfContent = slicesOfContent.slice(0, upperBound);
+                  }
+
+                  // highlight title and content
+
+                  function highlightKeyword(text, slice) {
+                    var result = '';
+                    var prevEnd = slice.start;
+                    slice.hits.forEach(function (hit) {
+                      result += text.substring(prevEnd, hit.position);
+                      var end = hit.position + hit.length;
+                      result += '<b class="search-keyword">' + text.substring(hit.position, end) + '</b>';
+                      prevEnd = end;
+                    });
+                    result += text.substring(prevEnd, slice.end);
+                    return result;
+                  }
+
+                  var resultItem = '';
+
+                  if (slicesOfTitle.length != 0) {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + highlightKeyword(title, slicesOfTitle[0]) + "</a>";
+                  } else {
+                    resultItem += "<li><a href='" + articleUrl + "' class='search-result-title'>" + title + "</a>";
+                  }
+
+                  slicesOfContent.forEach(function (slice) {
+                    resultItem += "<a href='" + articleUrl + "'>" +
+                      "<p class=\"search-result\">" + highlightKeyword(content, slice) +
+                      "...</p>" + "</a>";
+                  });
+
+                  resultItem += "</li>";
+                  resultItems.push({
+                    item: resultItem,
+                    searchTextCount: searchTextCount,
+                    hitCount: hitCount,
+                    id: resultItems.length
+                  });
+                }
+              })
+            };
+            if (keywords.length === 1 && keywords[0] === "") {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-search fa-5x" /></div>'
+            } else if (resultItems.length === 0) {
+              resultContent.innerHTML = '<div id="no-result"><i class="fa fa-frown-o fa-5x" /></div>'
+            } else {
+              resultItems.sort(function (resultLeft, resultRight) {
+                if (resultLeft.searchTextCount !== resultRight.searchTextCount) {
+                  return resultRight.searchTextCount - resultLeft.searchTextCount;
+                } else if (resultLeft.hitCount !== resultRight.hitCount) {
+                  return resultRight.hitCount - resultLeft.hitCount;
+                } else {
+                  return resultRight.id - resultLeft.id;
+                }
+              });
+              var searchResultList = '<ul class=\"search-result-list\">';
+              resultItems.forEach(function (result) {
+                searchResultList += result.item;
+              })
+              searchResultList += "</ul>";
+              resultContent.innerHTML = searchResultList;
+            }
+          }
+
+          if ('auto' === 'auto') {
+            input.addEventListener('input', inputEventFunction);
+          } else {
+            $('.search-icon').click(inputEventFunction);
+            input.addEventListener('keypress', function (event) {
+              if (event.keyCode === 13) {
+                inputEventFunction();
+              }
+            });
+          }
+
+          // remove loading animation
+          $(".local-search-pop-overlay").remove();
+          $('body').css('overflow', '');
+
+          proceedsearch();
+        }
+      });
+    }
+
+    // handle and trigger popup window;
+    $('.popup-trigger').click(function(e) {
+      e.stopPropagation();
+      if (isfetched === false) {
+        searchFunc(path, 'local-search-input', 'local-search-result');
+      } else {
+        proceedsearch();
+      };
+    });
+
+    $('.popup-btn-close').click(onPopupClose);
+    $('.popup').click(function(e){
+      e.stopPropagation();
+    });
+    $(document).on('keyup', function (event) {
+      var shouldDismissSearchPopup = event.which === 27 &&
+        $('.search-popup').is(':visible');
+      if (shouldDismissSearchPopup) {
+        onPopupClose();
+      }
+    });
+  </script>
+
+
+
+
+
+  
+
+  
+
+  
+
+  
+  
+
+  
+  
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Config({
+        tex2jax: {
+          inlineMath: [ ['$','$'], ["\\(","\\)"]  ],
+          processEscapes: true,
+          skipTags: ['script', 'noscript', 'style', 'textarea', 'pre', 'code']
+        }
+      });
+    </script>
+
+    <script type="text/x-mathjax-config">
+      MathJax.Hub.Queue(function() {
+        var all = MathJax.Hub.getAllJax(), i;
+        for (i=0; i < all.length; i += 1) {
+          all[i].SourceElement().parentNode.className += ' has-jax';
+        }
+      });
+    </script>
+    <script type="text/javascript" src="//cdn.mathjax.org/mathjax/latest/MathJax.js?config=TeX-AMS-MML_HTMLorMML"></script>
+  
+
+
+  
+
+  
+
+</body>
+</html>
