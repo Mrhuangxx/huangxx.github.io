@@ -5,7 +5,7 @@ date: 2018-03-10 21:16:23
 tags: paper
 ---
 # [Understanding Pedestrian Behaviors from Stationary Crowd Groups](https://www.cv-foundation.org/openaccess/content_cvpr_2015/papers/Yi_Understanding_Pedestrian_Behaviors_2015_CVPR_paper.pdf)
-1. 论文发表在CVPR2015上(一作:Shuai Yi)。
+1. 论文发表在CVPR2015上（一作:Shuai Yi）。
 
 2. 论文的主要工作是：建立了一个行人运动(pedestrian behavior)的模型，其中，对静态人群是分析是关键部分。模型可以用来预测行人的轨迹；预测行人运动的终点；以及对人群中行人的运动行为分析。
 3. 论文的方法：
